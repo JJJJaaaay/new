@@ -1,0 +1,164 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVAIA Boutique</title>
+    <link rel="stylesheet" href="stylee.css">
+    <link rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+    <section id="header">
+        <a href="#"> <img src="Avalogo-removebg-preview.png" style="height: 50px; width: 100px;" class="logo"> </a>
+    <div>
+        <ul id="navbar">
+            <li><a href="Front.html">Home</a></li>
+            <li><a href="Store.html">Store</a></li>
+            <li><a  href="Shop.html">Product</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Account</a></li>
+            <li  id="lg-bag"><a href="cart.html " class="active" ><i class="fa-solid fa-bag-shopping"></i> </a></li>
+            <a href="#" id="close"> <i class="fa-solid fa-xmark"></i> </a>
+           
+        </ul>
+    </div>
+    <div id="mobile"> 
+        <i id="bar" class="fa-solid fa-bars"></i></i>
+        <li><a href="Store.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+     </div>
+    </section>
+    <Style>
+     .confirmation-box {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .detail {
+      margin: 15px 0;
+      font-size: 16px;
+    }
+    .label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="confirmation-box" style="margin-top: 8vh;"> 
+  <h2>Thank you for your order!</h2>
+
+  <div class="detail"><span class="label">Name:</span> <span id="confirm-name"></span></div>
+  <div class="detail"><span class="label">Address:</span> <span id="confirm-address"></span></div>
+  <div class="detail"><span class="label">Phone:</span> <span id="confirm-phone"></span></div>
+  <div class="detail"><span class="label">Payment Method:</span> <span id="confirm-payment"></span></div>
+  <div class="detail"><span class="label">Voucher:</span> <span id="confirm-voucher"></span></div>
+  <div class="detail"><span class="label">Shipping Fee:</span> ₱<span id="confirmation-shipping">0.00</span></div>
+  <div class="detail"><span class="label">Total Amount:</span> ₱<span id="confirmation-total">0.00</span></div>
+  <div> <a href="Store.html"><button class="normal" style="background-color: black; color: white;">Back To Home</button> </div></a> 
+</div>
+
+<script>
+  // Get values from localStorage (same ones set in purchase.html)
+  const name = localStorage.getItem("buyerName") || "N/A";
+  const address = localStorage.getItem("buyerAddress") || "N/A";
+  const phone = localStorage.getItem("buyerPhone") || "N/A";
+  const payment = localStorage.getItem("paymentMethod") || "N/A";
+  const voucher = localStorage.getItem("usedVoucher") || "None";
+  const shipping = localStorage.getItem("finalShipping") || "0.00";
+  const total = localStorage.getItem("finalTotal") || "0.00";
+
+  document.getElementById("confirm-name").textContent = name;
+  document.getElementById("confirm-address").textContent = address;
+  document.getElementById("confirm-phone").textContent = phone;
+  document.getElementById("confirm-payment").textContent = payment;
+  document.getElementById("confirm-voucher").textContent = voucher;
+  document.getElementById("confirmation-shipping").textContent = shipping;
+  document.getElementById("confirmation-total").textContent = total;
+</script>
+
+
+      <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Sign up for newsletter!</h4>
+            <p>Get email updates for <span>special offers.</span></p>
+        </div>
+        <div class="form">
+            <input type="text" placeholder="your email address">
+            <button class="normal">Sign up</button>
+        </div>
+    </section>
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="Avalogo-removebg-preview.png" style="height: 50px; width: 100px;">
+            <h4>Contact</h4>
+            <p style="color: white;"><strong style="color: Black;">Address: </strong> Blk 30, Lot 32, Phase 5 Signal Village Taguig City.</p>
+            <p style="color: white;"><strong style="color: Black;">Phone: </strong> 091 234 6789</p>
+            <p style="color: white;"><strong style="color: Black;">Schedule: </strong> 10:00AM - 8:00PM, Mon - Sun</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-tiktok"></i>
+                </div>
+            </div>
+        </div>
+            <div class="col">
+                <h4>About</h4>
+                <a href="#">About us</a>
+                <a href="#">Privacy policy</a>
+                <a href="#">Terms & Condition</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="#">Sign in</a>
+                <a href="#">View cart</a>
+                <a href="#">Help</a>
+                <div class="col install">
+                    <h4>Install App</h4>
+                    <p>From App Store or Google Play</p>
+                    <div class="row">
+                        <img src="ios.png" width="150" height="50">
+                        <img src="playstore.png" width="150" height="50">
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy 2025, All rights reserved</p>
+                </div>
+            </div>
+    </footer>
+<script>
+  var MainImg = document.getElementById("MainImg");
+  var smallimage = document.getElementsByClassName("small-img");
+  smallimage[0].onclick = function(){
+    MainImg.src = smallimage[0].src;
+  }
+  smallimage[1].onclick = function(){
+    MainImg.src = smallimage[1].src;
+  }
+  smallimage[2].onclick = function(){
+    MainImg.src = smallimage[2].src;
+  }
+  smallimage[3].onclick = function(){
+    MainImg.src = smallimage[3].src;
+  }
+</script>
+
+    <script src="script.js"></script>
+</body>
+</html>
+  
+  
+  
+  
+ 

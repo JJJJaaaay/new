@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVAIA Boutique</title>
+    <link rel="stylesheet" href="stylee.css">
+    <link rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+    <section id="header">
+        <a href="#"> <img src="Avalogo-removebg-preview.png" style="height: 50px; width: 100px;" class="logo"> </a>
+    <div>
+        <ul id="navbar">
+            <li><a href="Front.html">Home</a></li>
+            <li><a href="Store.html">Store</a></li>
+            <li><a class="active"  href="Shop.html">Product</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Account</a></li>
+            <li  id="lg-bag"><a href="cart.html" class="active"><i class="fa-solid fa-bag-shopping"></i> </a></li>
+            <a href="#" id="close"> <i class="fa-solid fa-xmark"></i> </a>
+           
+        </ul>
+    </div>
+    <div id="mobile"> 
+        <i id="bar" class="fa-solid fa-bars"></i></i>
+        <li><a href="Store.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+     </div>
+    </section>
+    
+   <style>
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: #544885;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .cart-item img {
+      width: 90px;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .cart-info {
+      flex-grow: 1;
+    }
+
+    .cart-info h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .cart-info p {
+      margin: 4px 0;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .cart-info p:last-child {
+      font-weight: bold;
+      color: #544885;
+    }
+
+    #summary {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    #summary p {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    #summary p:last-child {
+      font-size: 18px;
+    }
+
+    .buttons {
+      margin-top: 1rem;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background-color: #544885;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #000000;
+    }
+
+    @media (max-width: 600px) {
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cart-item img {
+        width: 100%;
+        max-width: 180px;
+      }
+
+      .buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Your Cart</h1>
+  <div id="cart-items"></div>
+
+  <div id="summary">
+    <p>Subtotal: <span id="subtotal">₱0</span></p>
+    <p>Shipping Fee: <span id="shipping">₱50</span></p>
+    <p>Total: <span id="total">₱0</span></p>
+  </div>
+
+  <div class="buttons">
+    <button onclick="goBack()">← Back to Shop</button>
+    <button onclick="clearCart()">Clear Cart</button>
+    <button id="checkoutButton">Proceed to Checkout</button>
+
+  </div>
+
+  <script>
+    function loadCart() {
+      const cartContainer = document.getElementById("cart-items");
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        return;
+      }
+
+      cart.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        const imageSrc = item.colorImage || 'https://via.placeholder.com/90?text=No+Image';
+
+        div.innerHTML = `
+          <img src="${imageSrc}" alt="Product image" />
+          <div class="cart-info">
+            <h3>${item.name}</h3>
+            <p>Size: ${item.size}</p>
+            <p>Quantity: ${item.quantity}</p>
+            <p>Price: ₱${item.price * item.quantity}</p>
+          </div>
+        `;
+        cartContainer.appendChild(div);
+      });
+    }
+
+    function clearCart() {
+      localStorage.removeItem("cart");
+      location.reload();
+    }
+
+    function checkout() {
+      alert("Redirecting to checkout...");
+      window.location.href = "purchase.html"; // change if your checkout page is named differently
+    }
+
+    function goBack() {
+      window.location.href = "shop.html"; // update to your actual store page
+    }
+
+    // Load cart items and totals
+    loadCart();
+
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    let subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    let shippingFee = 50;
+    let total = subtotal + shippingFee;
+
+    document.getElementById('subtotal').textContent = `₱${subtotal}`;
+    document.getElementById('shipping').textContent = `₱${shippingFee}`;
+    document.getElementById('total').textContent = `₱${total}`;
+   document.getElementById("checkoutButton").addEventListener("click", function () {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems)); // Save cart
+    localStorage.setItem("subtotalAmount", subtotal);             // Save subtotal
+    localStorage.setItem("shippingFee", shippingFee);             // Save shipping
+    localStorage.setItem("totalAmount", total);                   // Save total
+    window.location.href = "purchase.html"; // Go to purchase page
+});
+
+  </script>
+
+      <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Sign up for newsletter!</h4>
+            <p>Get email updates for <span>special offers.</span></p>
+        </div>
+        <div class="form">
+            <input type="text" placeholder="your email address">
+            <button class="normal">Sign up</button>
+        </div>
+    </section>
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="Avalogo-removebg-preview.png" style="height: 50px; width: 100px;">
+            <h4>Contact</h4>
+            <p style="color: white;"><strong style="color: Black;">Address: </strong> Blk 30, Lot 32, Phase 5 Signal Village Taguig City.</p>
+            <p style="color: white;"><strong style="color: Black;">Phone: </strong> 091 234 6789</p>
+            <p style="color: white;"><strong style="color: Black;">Schedule: </strong> 10:00AM - 8:00PM, Mon - Sun</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-tiktok"></i>
+                </div>
+            </div>
+        </div>
+            <div class="col">
+                <h4>About</h4>
+                <a href="#">About us</a>
+                <a href="#">Privacy policy</a>
+                <a href="#">Terms & Condition</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="#">Sign in</a>
+                <a href="#">View cart</a>
+                <a href="#">Help</a>
+                <div class="col install">
+                    <h4>Install App</h4>
+                    <p>From App Store or Google Play</p>
+                    <div class="row">
+                        <img src="ios.png" width="150" height="50">
+                        <img src="playstore.png" width="150" height="50">
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy 2025, All rights reserved</p>
+                </div>
+            </div>
+    </footer>
+<script>
+  var MainImg = document.getElementById("MainImg");
+  var smallimage = document.getElementsByClassName("small-img");
+  smallimage[0].onclick = function(){
+    MainImg.src = smallimage[0].src;
+  }
+  smallimage[1].onclick = function(){
+    MainImg.src = smallimage[1].src;
+  }
+  smallimage[2].onclick = function(){
+    MainImg.src = smallimage[2].src;
+  }
+  smallimage[3].onclick = function(){
+    MainImg.src = smallimage[3].src;
+  }
+</script>
+
+    <script src="script.js"></script>
+</body>
+</html>
